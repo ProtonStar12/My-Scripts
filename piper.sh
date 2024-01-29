@@ -6,12 +6,18 @@ function synthesize_text {
 
 # Check if an argument is provided
 if [ -z "$1" ]; then
-    echo "Usage: $0 <text_to_synthesize>"
+    echo "Usage: $0 <text or text_file>"
     exit 1
 fi
 
-# Use the provided argument as the text to synthesize
-text_to_synthesize="$1"
+if [ -f "$1" ]; then
+    # Argument is a file, read the content
+    text_to_synthesize=$(cat "$1")
+else
+    # Argument is direct text
+    text_to_synthesize="$1"
+fi
+
 synthesize_text "$text_to_synthesize"
 
 
